@@ -4,6 +4,8 @@
 
 <style>
   h1 {
-    background-color: var(--header-color);
+    color: var(--main-color);
+    border-bottom: 1px var(--main-color) solid;
+    margin-bottom: 10px;
   }
 </style>

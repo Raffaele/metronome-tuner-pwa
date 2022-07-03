@@ -18,12 +18,14 @@
 
 <style>
   .selector {
-    background-color: red;
     display: flex;
     justify-content: space-evenly;
+    border-bottom: 1px red solid;
+    padding-bottom: 10px;
   }
 
   .selected {
-    background-color: green;
+    /* background-color: green; */
+    font-weight: bold;
   }
 </style>

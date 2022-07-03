@@ -24,7 +24,8 @@
 
 <style>
 	:global(:root){
-  	--header-color: purple;
+  	--main-color: purple;
+		--secondary-color: pink;
 	}
 	main {
 		text-align: center;
