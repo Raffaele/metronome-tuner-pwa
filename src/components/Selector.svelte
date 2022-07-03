@@ -20,12 +20,12 @@
   .selector {
     display: flex;
     justify-content: space-evenly;
-    border-bottom: 1px red solid;
+    border-bottom: 3px var(--main-color) solid;
     padding-bottom: 10px;
+    margin-bottom: 10px;
   }
 
   .selected {
-    /* background-color: green; */
     font-weight: bold;
   }
 </style>
