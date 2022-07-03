@@ -1,10 +1,25 @@
 <script lang="ts">
 	import Header from './components/Header.svelte';
+	import Selector from './components/Selector.svelte';
+	import Metronome from './components/Metronome.svelte';
+	import Tuner from './components/Tuner.svelte';
+	import {toolSelection, ToolSelection} from './stores/toolSelection';
+
+	let selectedTool: ToolSelection;
+
+	toolSelection.subscribe((selected) => {
+		selectedTool = selected;
+	});
 </script>
 
 <main>
 	<Header />
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<Selector />
+	{#if selectedTool === ToolSelection.Metronome}
+		<Metronome />
+	{:else}
+		<Tuner />
+	{/if}
 </main>
 
 <style>
