@@ -1,4 +1,5 @@
 <script lang="typescript">
+  import {beat} from '../sound';
   type IntervalId = ReturnType<typeof setInterval>;
 
   const BEAT_LENGTH = 50;
@@ -21,6 +22,7 @@
     }
     intervalId = setInterval(() => {
       isBeating = true;
+      beat(BEAT_LENGTH);
       setTimeout(() => {
         isBeating = false;
       }, BEAT_LENGTH);
