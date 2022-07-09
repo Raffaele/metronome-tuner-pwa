@@ -1,4 +1,5 @@
 <script lang="typescript">
+  import { onDestroy } from "svelte";
   import PlayIcon from "./icons/PlayIcon.svelte";
   import StopIcon from "./icons/StopIcon.svelte";
   import { beat } from "../sound";
@@ -17,11 +18,17 @@
   $: dotIndexes = Array.from({ length: movements }, (_, i) => i + 1);
   $: runBeat(speed, isRunning);
 
-  function runBeat(velocity: number, isActive: boolean) {
+  onDestroy(stopRun);
+
+  function stopRun() {
     if (intervalId) {
       clearInterval(intervalId);
       intervalId = null;
     }
+  }
+
+  function runBeat(velocity: number, isActive: boolean) {
+    stopRun();
     beatMove = movements;
     if (!isActive) {
       return;
@@ -49,16 +56,22 @@
       class:beat={isBeating && dotValue === beatMove}
     />{/each}
 </div>
-{#if isRunning}
-  <button on:click={() => (isRunning = false)}><StopIcon /> </button>
-{:else}
-  <button on:click={() => (isRunning = true)}><PlayIcon /></button>
-{/if}
+<div>
+  {#if isRunning}
+    <button on:click={() => (isRunning = false)}><StopIcon /> </button>
+  {:else}
+    <button on:click={() => (isRunning = true)}><PlayIcon /></button>
+  {/if}
+</div>
 
 <style>
   .circle-wrapper {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
+    border: 1px red solid;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 1vh;
   }
 
   .circle {
