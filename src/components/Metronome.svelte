@@ -1,45 +1,14 @@
 <script lang="typescript">
-  import ParamSetter from "./ParamSetter.svelte";
   import MetronomeRunner from "./MetronomeRunner.svelte";
-  import { beat } from "../sound";
-  type IntervalId = ReturnType<typeof setInterval>;
-
-  const BEAT_LENGTH = 50;
+  import MetronomeInput from "./MetronomeInput.svelte";
 
   let speed = 60;
-  let isRunning = false;
-  let isBeating = false;
   let volume = 1;
   let movements = 1;
-
-  let intervalId: IntervalId | null = null;
-
-  $: runBeat(speed, isRunning);
-
-  function runBeat(velocity: number, isActive: boolean) {
-    if (intervalId) {
-      clearInterval(intervalId);
-      intervalId = null;
-    }
-    if (!isActive) {
-      return;
-    }
-    intervalId = setInterval(() => {
-      isBeating = true;
-      beat(BEAT_LENGTH, volume / 20);
-      setTimeout(() => {
-        isBeating = false;
-      }, BEAT_LENGTH);
-    }, Math.trunc((60 * 1000) / velocity));
-  }
 </script>
 
 <div>
-  <ParamSetter bind:value={speed} min={40} max={240} title="Velocity" />
-
-  <ParamSetter bind:value={volume} min={0} max={20} title="Volume" />
-
-  <ParamSetter bind:value={movements} min={1} max={8} title="Movements" />
+  <MetronomeInput bind:movements bind:speed bind:volume />
 
   <MetronomeRunner {speed} {volume} {movements} />
 </div>
