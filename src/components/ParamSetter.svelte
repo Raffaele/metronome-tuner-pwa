@@ -26,7 +26,8 @@
 
 <style>
   fieldset {
-    margin-bottom: 8vh;
+    width: 85%;
+    margin: 2px auto 5vh;
   }
 
   legend {

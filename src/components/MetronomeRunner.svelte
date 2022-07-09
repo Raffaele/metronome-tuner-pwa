@@ -1,17 +1,15 @@
 <script lang="typescript">
-  import ParamSetter from "./ParamSetter.svelte";
-  import MetronomeRunner from "./MetronomeRunner.svelte";
   import { beat } from "../sound";
   type IntervalId = ReturnType<typeof setInterval>;
 
-  const BEAT_LENGTH = 50;
-
-  let speed = 60;
+  export let speed: number;
+  export let volume: number;
+  export let movements: number;
   let isRunning = false;
   let isBeating = false;
-  let volume = 1;
-  let movements = 1;
+  let beatMove = 1;
 
+  const BEAT_LENGTH = 50;
   let intervalId: IntervalId | null = null;
 
   $: runBeat(speed, isRunning);
@@ -34,12 +32,29 @@
   }
 </script>
 
-<div>
-  <ParamSetter bind:value={speed} min={40} max={240} title="Velocity" />
-
-  <ParamSetter bind:value={volume} min={0} max={20} title="Volume" />
-
-  <ParamSetter bind:value={movements} min={1} max={8} title="Movements" />
-
-  <MetronomeRunner {speed} {volume} {movements} />
+<div class="circle-wrapper">
+  <div class="circle" class:beat={isBeating} />
 </div>
+{#if isRunning}
+  <button on:click={() => (isRunning = false)}>stop</button>
+{:else}
+  <button on:click={() => (isRunning = true)}>play</button>
+{/if}
+
+<style>
+  .circle-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: gray;
+  }
+
+  .beat {
+    background-color: red;
+  }
+</style>
