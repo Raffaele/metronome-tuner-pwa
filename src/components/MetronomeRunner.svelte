@@ -1,4 +1,6 @@
 <script lang="typescript">
+  import PlayIcon from "./icons/PlayIcon.svelte";
+  import StopIcon from "./icons/StopIcon.svelte";
   import { beat } from "../sound";
   type IntervalId = ReturnType<typeof setInterval>;
 
@@ -13,7 +15,6 @@
   let intervalId: IntervalId | null = null;
 
   $: dotIndexes = Array.from({ length: movements }, (_, i) => i + 1);
-
   $: runBeat(speed, isRunning);
 
   function runBeat(velocity: number, isActive: boolean) {
@@ -27,9 +28,9 @@
     }
     intervalId = setInterval(() => {
       beatMove = getNextBeatMove();
-      console.log({ beatMove });
       isBeating = true;
-      beat(BEAT_LENGTH, volume / 20);
+      const beatVolume = beatMove === 1 ? volume / 10 : volume / 20;
+      beat(BEAT_LENGTH, beatVolume);
       setTimeout(() => {
         isBeating = false;
       }, BEAT_LENGTH);
@@ -49,9 +50,9 @@
     />{/each}
 </div>
 {#if isRunning}
-  <button on:click={() => (isRunning = false)}>stop</button>
+  <button on:click={() => (isRunning = false)}><StopIcon /> </button>
 {:else}
-  <button on:click={() => (isRunning = true)}>play</button>
+  <button on:click={() => (isRunning = true)}><PlayIcon /></button>
 {/if}
 
 <style>

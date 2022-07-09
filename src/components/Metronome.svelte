@@ -8,7 +8,6 @@
 </script>
 
 <div>
-  <MetronomeInput bind:movements bind:speed bind:volume />
-
   <MetronomeRunner {speed} {volume} {movements} />
+  <MetronomeInput bind:movements bind:speed bind:volume />
 </div>
