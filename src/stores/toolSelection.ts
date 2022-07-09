@@ -5,4 +5,4 @@ export enum ToolSelection {
   Tuner = 'TUNER'
 };
 
-export const toolSelection = writable<ToolSelection>(ToolSelection.Tuner);
+export const toolSelection = writable<ToolSelection>(ToolSelection.Metronome);

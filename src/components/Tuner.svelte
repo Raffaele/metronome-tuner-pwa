@@ -1,4 +1,6 @@
 <script lang="ts">
+  import PlayIcon from "./icons/PlayIcon.svelte";
+  import StopIcon from "./icons/StopIcon.svelte";
   import ParamSetter from "./ParamSetter.svelte";
   import { playTuner } from "../sound";
   let selectedNote = "A";
@@ -42,7 +44,6 @@
     const noteFrequency = rate * originalFrequency;
     const octaveRate = 2 ** (oct - 4);
     const finalFrequency = noteFrequency * octaveRate;
-    console.log({ isActive, finalFrequency });
     playTuner(isActive, finalFrequency, volume);
   }
 </script>
@@ -65,9 +66,9 @@
   </div>
   <div>
     {#if isPlaying}
-      <button on:click={() => (isPlaying = false)}>stop</button>
+      <button on:click={() => (isPlaying = false)}><StopIcon /></button>
     {:else}
-      <button on:click={() => (isPlaying = true)}>play</button>
+      <button on:click={() => (isPlaying = true)}><PlayIcon /></button>
     {/if}
   </div>
   <ParamSetter bind:value={volume} min={0} max={20} title="Volume" />
