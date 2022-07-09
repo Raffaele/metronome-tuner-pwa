@@ -9,5 +9,6 @@ export function beat(velocity: number, volume: number) {
   oscillator.start();
   setTimeout(() => {
     oscillator.stop();
+    audioCtx.close();
   }, velocity);
 }
