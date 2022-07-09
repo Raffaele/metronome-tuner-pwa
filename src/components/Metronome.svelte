@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import MetronomeRunner from "./MetronomeRunner.svelte";
   import MetronomeInput from "./MetronomeInput.svelte";
 

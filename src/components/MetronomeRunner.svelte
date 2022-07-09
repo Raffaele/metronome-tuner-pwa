@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import { onDestroy } from "svelte";
   import PlayIcon from "./icons/PlayIcon.svelte";
   import StopIcon from "./icons/StopIcon.svelte";

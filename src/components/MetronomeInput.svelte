@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
   import ParamSetter from "./ParamSetter.svelte";
 
   export let speed: number;
