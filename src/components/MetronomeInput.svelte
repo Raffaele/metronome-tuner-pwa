@@ -8,4 +8,4 @@
 
 <ParamSetter bind:value={speed} min={40} max={240} title="Velocity" />
 <ParamSetter bind:value={volume} min={0} max={20} title="Volume" />
-<ParamSetter bind:value={movements} min={1} max={8} title="Movements" />
+<ParamSetter bind:value={movements} min={1} max={12} title="Movements" />

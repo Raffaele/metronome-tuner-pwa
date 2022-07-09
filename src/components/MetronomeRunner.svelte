@@ -12,6 +12,8 @@
   const BEAT_LENGTH = 50;
   let intervalId: IntervalId | null = null;
 
+  $: dotIndexes = Array.from({ length: movements }, (_, i) => i + 1);
+
   $: runBeat(speed, isRunning);
 
   function runBeat(velocity: number, isActive: boolean) {
@@ -19,10 +21,13 @@
       clearInterval(intervalId);
       intervalId = null;
     }
+    beatMove = movements;
     if (!isActive) {
       return;
     }
     intervalId = setInterval(() => {
+      beatMove = getNextBeatMove();
+      console.log({ beatMove });
       isBeating = true;
       beat(BEAT_LENGTH, volume / 20);
       setTimeout(() => {
@@ -30,10 +35,18 @@
       }, BEAT_LENGTH);
     }, Math.trunc((60 * 1000) / velocity));
   }
+
+  function getNextBeatMove() {
+    const nextBeatMove = beatMove + 1;
+    return nextBeatMove > movements ? 1 : nextBeatMove;
+  }
 </script>
 
 <div class="circle-wrapper">
-  <div class="circle" class:beat={isBeating} />
+  {#each dotIndexes as dotValue}<div
+      class="circle"
+      class:beat={isBeating && dotValue === beatMove}
+    />{/each}
 </div>
 {#if isRunning}
   <button on:click={() => (isRunning = false)}>stop</button>
@@ -52,6 +65,7 @@
     height: 20px;
     border-radius: 100%;
     background-color: gray;
+    margin: 0 0.5%;
   }
 
   .beat {
