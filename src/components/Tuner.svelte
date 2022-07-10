@@ -7,7 +7,7 @@
   import { getTuner, storeTuner } from "../utils/localMemo";
 
   const storedInfo = getTuner();
-  let selectedNote = storedInfo.selectednote || "A";
+  let selectedNote = storedInfo.selectedNote || "A";
   let octave = storedInfo.octave || 4;
   let aFrequency = storedInfo.aFrequency || 440;
   let volume = storedInfo.volume || 1;

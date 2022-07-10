@@ -23,6 +23,7 @@ export function getMetronome() {
 }
 
 export function storeTuner(value: TunerInfo) {
+  console.log(value);
   store(TUNER_KEY, value);
 }
 
@@ -38,23 +39,3 @@ function recover(key: string) {
   const stored = localStorage.getItem(key);
   return stored ? JSON.parse(stored) : {};
 }
-
-// class Memo {
-//   get volume () {
-//     return getIntLocalStorage(Keys.Volume, 1);
-//   }
-//   set volume (v: number) {
-//     setIntLocalStorage(Keys.Volume, v);
-//   }
-// }
-
-// function getIntLocalStorage (key: Keys, defaultValue: number) {
-//   const storedItem = localStorage.getItem(key);
-//   return storedItem ? +storedItem : defaultValue;
-// }
-
-// function setIntLocalStorage (key: Keys, value: number) {
-//   localStorage.setItem(key, `${value}`);
-// }
-
-// export const memo = new Memo();
