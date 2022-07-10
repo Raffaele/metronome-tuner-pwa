@@ -1,10 +1,22 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   import MetronomeRunner from "./MetronomeRunner.svelte";
   import MetronomeInput from "./MetronomeInput.svelte";
+  import { getMetronome, storeMetronome } from "../utils/localMemo";
 
-  let speed = 60;
-  let volume = 1;
-  let movements = 1;
+  const stored = getMetronome();
+
+  let speed = stored.speed || 60;
+  let volume = stored.valume || 1;
+  let movements = stored.movements || 1;
+
+  onDestroy(() => {
+    storeMetronome({
+      speed,
+      volume,
+      movements,
+    });
+  });
 </script>
 
 <div>

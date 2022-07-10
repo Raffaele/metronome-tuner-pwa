@@ -2,7 +2,7 @@
   import { onDestroy } from "svelte";
   import PlayIcon from "./icons/PlayIcon.svelte";
   import StopIcon from "./icons/StopIcon.svelte";
-  import { beat } from "../sound";
+  import { beat } from "../utils/sound";
   type IntervalId = ReturnType<typeof setInterval>;
 
   export let speed: number;

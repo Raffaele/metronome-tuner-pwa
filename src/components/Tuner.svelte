@@ -1,11 +1,16 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   import PlayIcon from "./icons/PlayIcon.svelte";
   import StopIcon from "./icons/StopIcon.svelte";
   import ParamSetter from "./ParamSetter.svelte";
-  import { playTuner } from "../sound";
-  let selectedNote = "A";
-  let octave = 4;
-  let aFrequency = 440;
+  import { playTuner } from "../utils/sound";
+  import { getTuner, storeTuner } from "../utils/localMemo";
+
+  const storedInfo = getTuner();
+  let selectedNote = storedInfo.selectednote || "A";
+  let octave = storedInfo.octave || 4;
+  let aFrequency = storedInfo.aFrequency || 440;
+  let volume = storedInfo.volume || 1;
   let isPlaying = false;
   const noteLines = [
     [
@@ -25,7 +30,6 @@
       { name: "B", frequency: 493.88 },
     ],
   ];
-  let volume = 1;
 
   $: runPlay(isPlaying, volume, octave, aFrequency, selectedNote);
 
@@ -44,8 +48,18 @@
     const noteFrequency = rate * originalFrequency;
     const octaveRate = 2 ** (oct - 4);
     const finalFrequency = noteFrequency * octaveRate;
-    playTuner(isActive, finalFrequency, volume);
+    playTuner(isActive, finalFrequency, vol);
   }
+
+  onDestroy(() => {
+    playTuner(false, 0, 0);
+    storeTuner({
+      volume,
+      selectedNote,
+      octave,
+      aFrequency,
+    });
+  });
 </script>
 
 <div>
@@ -71,7 +85,7 @@
       <button on:click={() => (isPlaying = true)}><PlayIcon /></button>
     {/if}
   </div>
-  <ParamSetter bind:value={volume} min={0} max={20} title="Volume" />
+  <ParamSetter bind:value={volume} min={0} max={10} title="Volume" />
   <ParamSetter bind:value={octave} min={2} max={6} title="Octave" />
   <ParamSetter
     bind:value={aFrequency}

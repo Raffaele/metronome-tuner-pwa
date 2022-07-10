@@ -4,6 +4,7 @@
 
 <style>
   h1 {
+    font-size: 28px;
     color: var(--main-color);
     border-bottom: 1px var(--main-color) solid;
     margin-bottom: 10px;
